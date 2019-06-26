@@ -8,6 +8,10 @@ var enableEraser = false;
 
 var brush = document.querySelector("#brush");
 
+var black = document.querySelector("#black");
+var green = document.querySelector("#green");
+var blue = document.querySelector("#blue");
+
 hasTouch() ? listenTouch() : listenMouse();
 
 // listen mouse
@@ -70,10 +74,30 @@ function listenTouch() {
 // Actions
 eraser.addEventListener("click", () => {
   enableEraser = true;
+  eraser.classList.add("active");
+  brush.classList.remove("active");
 });
 
 brush.addEventListener("click", () => {
   enableEraser = false;
+  brush.classList.add("active");
+  eraser.classList.remove("active");
+});
+
+black.addEventListener("click", () => {
+  resetColors();
+  black.classList.add("active");
+  context.strokeStyle = "black";
+});
+green.addEventListener("click", () => {
+  resetColors();
+  green.classList.add("active");
+  context.strokeStyle = "green";
+});
+blue.addEventListener("click", () => {
+  resetColors();
+  blue.classList.add("active");
+  context.strokeStyle = "blue";
 });
 
 // Helper
@@ -99,6 +123,12 @@ function setupRect() {
 
 function hasTouch() {
   return "ontouchstart" in window;
+}
+
+function resetColors() {
+  [black, green, blue].forEach(color => {
+    color.classList.remove("active");
+  });
 }
 
 // resize

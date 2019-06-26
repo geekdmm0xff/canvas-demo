@@ -3,13 +3,65 @@ body {
     padding: 0;
 }
 
+ol,
+ul {
+    list-style: none;
+    padding: 0;
+}
+
 #canvas {
-    background: green;
     display: block;
 }
 
 .actions {
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.actions>svg {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 10px;
+}
+
+.actions>svg.active {
+    fill: red;
+}
+
+.colors {
+    position: fixed;
+    top: 30px;
+    left: 10px;
+}
+
+.colors>li {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 10px 0;
+}
+
+.colors>li.active {
+    border: 2px solid grey;
+}
+
+.colors>li.black {
+    background: black;
+}
+
+.colors>li.green {
+    background: green;
+}
+
+.colors>li.blue {
+    background: blue;
 }
