@@ -65,3 +65,23 @@ ul {
 .colors>li.blue {
     background: blue;
 }
+
+.sizes {
+    position: fixed;
+    top: 30px;
+    right: 10px;
+}
+
+.sizes>li {
+    width: 30px;
+    height: 0;
+    margin: 10px 0;
+}
+
+.sizes>li.thin {
+    border-top: 5px solid black;
+}
+
+.sizes>li.thick {
+    border-top: 10px solid black;
+}

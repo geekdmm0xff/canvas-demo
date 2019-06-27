@@ -7,11 +7,17 @@ var eraser = document.querySelector("#eraser");
 var enableEraser = false;
 
 var brush = document.querySelector("#brush");
+var clear = document.querySelector("#clear");
+var download = document.querySelector("#save");
 
 var black = document.querySelector("#black");
 var green = document.querySelector("#green");
 var blue = document.querySelector("#blue");
 
+var thin = document.querySelector("#thin");
+var thick = document.querySelector("#thick");
+
+initCanvas();
 hasTouch() ? listenTouch() : listenMouse();
 
 // listen mouse
@@ -71,17 +77,36 @@ function listenTouch() {
   });
 }
 
+// setup
+function initCanvas() {
+  context.lineWidth = 5;
+  context.fillStyle = "green";
+  console.log("w:", canvas.width);
+  console.log("h:", canvas.height);
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  console.log("c:", context);
+}
+
 // Actions
 eraser.addEventListener("click", () => {
   enableEraser = true;
   eraser.classList.add("active");
   brush.classList.remove("active");
 });
-
 brush.addEventListener("click", () => {
   enableEraser = false;
   brush.classList.add("active");
   eraser.classList.remove("active");
+});
+clear.addEventListener("click", () => {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+});
+download.addEventListener("click", () => {
+  var image = canvas.toDataURL();
+  var aLink = document.createElement("a");
+  aLink.download = "我的作品.png";
+  aLink.href = image;
+  aLink.click();
 });
 
 black.addEventListener("click", () => {
@@ -100,6 +125,13 @@ blue.addEventListener("click", () => {
   context.strokeStyle = "blue";
 });
 
+thin.addEventListener("click", () => {
+  context.lineWidth = 5;
+});
+thick.addEventListener("click", () => {
+  context.lineWidth = 10;
+});
+
 // Helper
 
 function drawCircle(x, y) {
@@ -110,7 +142,6 @@ function drawCircle(x, y) {
 
 function drawLine(x1, y1, x2, y2) {
   context.beginPath();
-  context.lineWidth = 10;
   context.moveTo(x1, y1);
   context.lineTo(x2, y2);
   context.stroke();
